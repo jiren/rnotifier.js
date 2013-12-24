@@ -34,11 +34,24 @@
     }
   };
 
-  _R.notify = function(name, data){
+  _R.event = function(name, data){
+    this.notify('event', name, data);
+  };
+
+  _R.alert = function(name, data){
+    this.notify('alert', name, data);
+  };
+
+  _R.exception = function(e){
+    //Process exception e  
+    //this.notify('exception', name, data);
+  };
+
+  _R.notify = function(type, name, data){
     if(!this.valid_opts() || !name || !data){ return false; }
     
     if(typeof name == 'string'){
-      this._send({'event': this.eventData(name, data)});
+      this._send({'event': this.eventData(name, data), type: type});
     }
   };
 
